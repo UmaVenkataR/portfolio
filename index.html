@@ -7,454 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
-        :root {
-            --primary: #6366f1;
-            --primary-light: #818cf8;
-            --secondary: #10b981;
-            --dark: #1e293b;
-            --light: #f8fafc;
-            --accent: #f59e0b;
-        }
-        
-        html, body {
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            scroll-behavior: smooth;
-            overflow-x: hidden;
-            transition: background-color 0.5s ease, color 0.3s ease;
-        }
-        
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--light);
-            color: #1e293b;
-        }
-        
-        body.dark-mode {
-            background-color: #0f172a;
-            color: #f8fafc;
-        }
-        
-        /* Full viewport height sections */
-        .full-vh {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        /* Define shared gradient classes */
-        .gradient-bg {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            color: black;
-        }
-
-        .dark-mode .gradient-bg {
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            color: white;
-        }
-
-        /* Apply the shared class to all relevant sections */
-        .hero-bg,
-        .about-bg,
-        .projects-bg,
-        .publications-bg,
-        .skills-bg,
-        .contact-bg {
-            @extend .gradient-bg;
-        }
-        
-        /* Floating particles animation */
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            pointer-events: none;
-            animation: float 15s linear infinite;
-            opacity: 0.6;
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.6;
-            }
-            100% {
-                transform: translateY(-1000px) rotate(720deg);
-                opacity: 0;
-            }
-        }
-        
-        /* Intro Animation Styles */
-        #intro-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 9999;
-            overflow: hidden;
-        }
-        
-        .tech-icon {
-            position: absolute;
-            font-size: 2.5rem;
-            color: rgba(255, 255, 255, 0.8);
-            animation: floatAround 15s linear infinite;
-            opacity: 0;
-            filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.5));
-        }
-        
-        @keyframes floatAround {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translate(calc(100vw * var(--tx)), calc(100vh * var(--ty))) rotate(360deg);
-                opacity: 0;
-            }
-        }
-        
-        .name-reveal {
-            font-size: 4rem;
-            font-weight: 700;
-            color: white;
-            text-align: center;
-            opacity: 0;
-            transform: scale(0.5);
-            animation: nameReveal 3s ease-out forwards;
-            animation-delay: 2s;
-            text-shadow: 0 0 20px rgba(99, 102, 241, 0.7);
-            z-index: 1;
-        }
-        
-        @keyframes nameReveal {
-            0% {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-        
-        /* Portfolio Page Styles */
-        .gradient-text {
-            background: linear-gradient(90deg, var(--primary), var(--primary-light));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .gradient-bg {
-            background: linear-gradient(135deg, var(--light) 0%, #e2e8f0 100%);
-        }
-        
-        .card-hover {
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            transform: translateY(0);
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        
-        .nav-link {
-            position: relative;
-        }
-        
-        .nav-link:after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -2px;
-            left: 0;
-            background: linear-gradient(90deg, var(--primary), var(--primary-light));
-            transition: width 0.4s ease;
-        }
-        
-        .nav-link:hover:after {
-            width: 100%;
-        }
-        
-        .section-title {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-title:after {
-            content: '';
-            position: absolute;
-            width: 50%;
-            height: 4px;
-            bottom: -12px;
-            left: 25%;
-            background: linear-gradient(90deg, var(--primary), var(--primary-light));
-            border-radius: 2px;
-        }
-        
-        .floating {
-            animation: floating 6s ease-in-out infinite;
-        }
-        
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .wave-shape {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            overflow: hidden;
-            line-height: 0;
-        }
-        
-        .wave-shape svg {
-            position: relative;
-            display: block;
-            width: calc(100% + 1.3px);
-            height: 150px;
-        }
-        
-        .wave-shape .shape-fill {
-            fill: #FFFFFF;
-        }
-        
-        .skill-bar {
-            transition: width 1.5s ease-in-out;
-        }
-        
-        .fade-in {
-            opacity: 0;
-            transition: opacity 0.6s ease-in;
-        }
-        
-        .fade-in.visible {
-            opacity: 1;
-        }
-        
-        .project-card {
-            perspective: 1000px;
-            height: 100%;
-        }
-        
-        .project-card-inner {
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-            height: 100%;
-        }
-        
-        .project-card:hover .project-card-inner {
-            transform: rotateY(10deg);
-        }
-        
-        /* New animations */
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes slideIn {
-            from { transform: translateX(-50px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        
-        .slide-in {
-            animation: slideIn 0.8s ease-out forwards;
-        }
-        
-        .publication-card {
-            transition: all 0.3s ease;
-            background: linear-gradient(145deg, #ffffff, #f0f4f8);
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.1), -5px -5px 15px rgba(255,255,255,0.7);
-            height: 100%;
-        }
-        
-        .dark-mode .publication-card {
-            background: linear-gradient(145deg, #1e293b, #0f172a);
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.3), -5px -5px 15px rgba(255,255,255,0.05);
-        }
-        
-        .publication-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 8px 8px 20px rgba(0,0,0,0.15), -8px -8px 20px rgba(255,255,255,0.7);
-        }
-        
-        .dark-mode .publication-card:hover {
-            box-shadow: 8px 8px 20px rgba(0,0,0,0.4), -8px -8px 20px rgba(255,255,255,0.1);
-        }
-        
-        .download-btn {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .download-btn::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0));
-            transform: rotate(30deg);
-            transition: all 0.3s;
-        }
-        
-        .download-btn:hover::after {
-            left: 100%;
-        }
-        
-        /* Glassmorphism effect */
-        .glass {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.18);
-        }
-        
-        .dark-mode .glass {
-            background: rgba(15, 23, 42, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        /* Dark mode toggle */
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 30px;
-        }
-        
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        
-        .toggle-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #1e293b;
-            transition: .4s;
-            border-radius: 30px;
-        }
-        
-        .toggle-slider:before {
-            position: absolute;
-            content: "";
-            height: 22px;
-            width: 22px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-        
-        input:checked + .toggle-slider {
-            background-color: #818cf8;
-        }
-        
-        input:checked + .toggle-slider:before {
-            transform: translateX(30px);
-        }
-        
-        .toggle-icon {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            color: white;
-            font-size: 14px;
-        }
-        
-        .sun-icon {
-            left: 8px;
-        }
-        
-        .moon-icon {
-            right: 8px;
-        }
-        
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .hero-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .hero-image {
-                margin-top: 2rem;
-            }
-            
-            .section-title:after {
-                width: 30%;
-                left: 35%;
-            }
-            
-            .name-reveal {
-                font-size: 2.5rem;
-            }
-            
-            .tech-icon {
-                font-size: 1.8rem;
-            }
-            
-            .full-vh {
-                padding-top: 6rem;
-                padding-bottom: 4rem;
-            }
-        }
-        
-        @media (min-width: 1920px) {
-            .container-xl {
-                max-width: 1800px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-        }
-        .backgroundcolorBox{
-            --tw-bg-opacity: 1;
-            background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
-            background-color: rgba(31, 41, 55, var(--tw-bg-opacity));
-        }
-    </style>
+    <link href="portfolio.css" rel="stylesheet">
+    <script src="portfolio.js" defer></script>
 </head>
 <body>
     <!-- Intro Animation Screen -->
@@ -470,7 +24,7 @@
             <div class="mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-20 items-center">
                     <div class="flex items-center">
-                        <span class="text-2xl font-bold gradient-text">UK</span>
+                        <a href="#home" class="text-2xl font-bold gradient-text">UK</a>
                     </div>
                     <div class="hidden md:flex items-center space-x-8">
                         <a href="#home" class="nav-link text-gray-700 hover:text-indigo-600 dark:text-gray-300 dark:hover:text-indigo-400 px-3 py-2 font-medium">Home</a>
@@ -587,7 +141,7 @@
                                 </h4>
                                 <div class="space-y-2">
                                     <p class=" "><span class="font-medium">Name:</span> Uma Venkata Ravi Teja, Kotharu</p>
-                                    <p class=" "><span class="font-medium">Location:</span>Hyderabad, India </p>
+                                    <p class=" "><span class="font-medium">Location:</span> Hyderabad, India </p>
                                     <p class=" "><span class="font-medium">Email:</span> umavenkatakotharu@gmail.com</p>
                                 </div>
                             </div>
@@ -771,7 +325,7 @@
                             higher accuracy of 90% for SVM and F1-score of 80%, recall of 82%, and precision of 79%. The findings strongly guide the application of the SVM classifier for voice analysis based PD classification with the quantile transform with RFE and GridSearchCV.</p>
                         <div class="flex justify-between items-center">
                             <span class="text-sm font-medium">10.1109/ICCCNT51525.2021.9580024</span>
-                            <a href="https://ieeexplore.ieee.org/document/9580024" class="text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 text-sm font-medium inline-flex items-center">
+                            <a href="https://ieeexplore.ieee.org/document/9580024" target="_blank" class="text-indigo-600 hover:text-indigo-800 dark:text-indigo-400 dark:hover:text-indigo-300 text-sm font-medium inline-flex items-center">
                                 Read <i class="fas fa-external-link-alt ml-1"></i>
                             </a>
                         </div>
@@ -792,7 +346,7 @@
                         <p class="mb-4" style=" text-align: justify;">Diabetes is one among the major common diseases known around the world. It has no permanent solution and an expensive treatment for an average person to go through. It can lead the affected person to death. There isn't any actual treatment for this sickness, but it is controllable with remedies and diet. So the best thing with the current avilable treatments is to detect it early and have it under control. There is a lot of information collected on this subject, as there are so many sufferers with this condition. This makes it feasible for researchers to apply information mining strategies for this subject. It should be noted that UCI dataset repository which carries 520 instances, each having 17 attributes was used in this paper and that the prediction periods included daytime predictions. The algorithms namely Random Forest, Support Vector Machine (SVM), Decision Tree, Logistic Regression, K-Nearest Neighbors, Stochastic Gradient Descent Classifier (SGDC) were employed. There are factors during the nocturnal period which are not modeled during this experimentation.</p>
                         <div class="flex justify-between items-center">
                             <span class="text-sm text-purple-600 dark:text-purple-400 font-medium">10.1109/STCR51658.2021.9588849</span>
-                            <a href="https://ieeexplore.ieee.org/document/9588849" class="text-purple-600 hover:text-purple-800 dark:text-purple-400 dark:hover:text-purple-300 text-sm font-medium inline-flex items-center">
+                            <a href="https://ieeexplore.ieee.org/document/9588849" target="_blank" class="text-purple-600 hover:text-purple-800 dark:text-purple-400 dark:hover:text-purple-300 text-sm font-medium inline-flex items-center">
                                 Read <i class="fas fa-external-link-alt ml-1"></i>
                             </a>
                         </div>
@@ -812,7 +366,7 @@
                         <p class="mb-4"style=" text-align: justify;">In the agriculture field, the detection of diseases from various plants through images is one of the most vital areas that needs to be ameliorated. The collection of cultivating crops and alleviation of features are the source of plant infection. A range of spot evaluation methods and disease diagnoses have been applied and advanced in a broad variety of crops. The Deep Learning concept of artificial intelligence is applied. However, this article introduces a model to detect disease in less time. Image processing techniques are used for operating the data with various methods. Three distinct rice plant diseases are included in the dataset: brown spot, leaf smut, and bacterial leaf blight. Spotting the disease on plants has been performed with various techniques like transfer learning and image data generators. In transfer learning, there are four types of approaches used: reusing the trained model, pre-trained model, feature extraction, and popular trained models. A popular model used to train the data is InceptionV3. Categorical cross-entropy is used for calculating the loss and optimization of the model. A surpassing result of 99.33% accuracy has been achieved on the testing dataset.</p>
                         <div class="flex justify-between items-center">
                             <span class="text-sm text-green-600 dark:text-green-400 font-medium">10.1109/SMARTGENCON51891.2021.9645888</span>
-                            <a href="https://ieeexplore.ieee.org/document/9645888" class="text-green-600 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300 text-sm font-medium inline-flex items-center">
+                            <a href="https://ieeexplore.ieee.org/document/9645888" target="_blank" class="text-green-600 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300 text-sm font-medium inline-flex items-center">
                                 Read <i class="fas fa-external-link-alt ml-1"></i>
                             </a>
                         </div>
@@ -1056,7 +610,7 @@
                             <div class="mt-12">
                                 <h4 class="text-sm font-medium    mb-4">Follow Me</h4>
                                 <div class="flex space-x-4">
-                                    <a href="#" class="h-12 w-12 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center text-indigo-600 dark:text-indigo-400 hover:bg-indigo-200 dark:hover:bg-indigo-800 transition duration-300 text-xl">
+                                    <!-- <a href="#" class="h-12 w-12 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center text-indigo-600 dark:text-indigo-400 hover:bg-indigo-200 dark:hover:bg-indigo-800 transition duration-300 text-xl">
                                         <i class="fab fa-github"></i>
                                     </a>
                                     <a href="#" class="h-12 w-12 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center text-indigo-600 dark:text-indigo-400 hover:bg-indigo-200 dark:hover:bg-indigo-800 transition duration-300 text-xl">
@@ -1067,7 +621,95 @@
                                     </a>
                                     <a href="#" class="h-12 w-12 rounded-full bg-indigo-100 dark:bg-indigo-900 flex items-center justify-center text-indigo-600 dark:text-indigo-400 hover:bg-indigo-200 dark:hover:bg-indigo-800 transition duration-300 text-xl">
                                         <i class="fab fa-dribbble"></i>
-                                    </a>
+                                    </a> -->
+                                    <!-- From Uiverse.io by wilsondesouza --> 
+                                    <ul class="example-2">
+                                        <li class="icon-content">
+                                        <a href="https://www.linkedin.com/in/ravi-teja-717231183/" target="_blank" aria-label="LinkedIn" data-social="linkedin">
+                                            <div class="filled"></div>
+                                            <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            class="bi bi-linkedin"
+                                            viewBox="0 0 16 16"
+                                            xml:space="preserve"
+                                            >
+                                            <path
+                                                d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"
+                                                fill="currentColor"
+                                            ></path>
+                                            </svg>
+                                        </a>
+                                        <div class="tooltip">LinkedIn</div>
+                                        </li>
+                                        <li class="icon-content">
+                                        <a href="https://github.com/UmaVenkataR" target="_blank" aria-label="GitHub" data-social="github">
+                                            <div class="filled"></div>
+                                            <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            class="bi bi-github"
+                                            viewBox="0 0 16 16"
+                                            xml:space="preserve"
+                                            >
+                                            <path
+                                                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"
+                                                fill="currentColor"
+                                            ></path>
+                                            </svg>
+                                        </a>
+                                        <div class="tooltip">GitHub</div>
+                                        </li>
+                                        <li class="icon-content">
+                                        <a
+                                            href="https://www.instagram.com/roy_ash_/" target="_blank"
+                                            aria-label="Instagram"
+                                            data-social="instagram"
+                                        >
+                                            <div class="filled"></div>
+                                            <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            class="bi bi-instagram"
+                                            viewBox="0 0 16 16"
+                                            xml:space="preserve"
+                                            >
+                                            <path
+                                                d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"
+                                                fill="currentColor"
+                                            ></path>
+                                            </svg>
+                                        </a>
+                                        <div class="tooltip">Instagram</div>
+                                        </li>
+                                        <li class="icon-content">
+                                        <a href="https://www.youtube.com/@TFA002" target="_blank" aria-label="Youtube" data-social="youtube">
+                                            <div class="filled"></div>
+                                            <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            width="16"
+                                            height="16"
+                                            fill="currentColor"
+                                            class="bi bi-youtube"
+                                            viewBox="0 0 16 16"
+                                            xml:space="preserve"
+                                            >
+                                            <path
+                                                d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.01 2.01 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.01 2.01 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31 31 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.01 2.01 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A100 100 0 0 1 7.858 2zM6.4 5.209v4.818l4.157-2.408z"
+                                                fill="currentColor"
+                                            ></path>
+                                            </svg>
+                                        </a>
+                                        <div class="tooltip">Youtube</div>
+                                        </li>
+                                    </ul>
+  
                                 </div>
                             </div>
                         </div>
@@ -1166,6 +808,8 @@
         </div>
     </div>
 
+
+<!-- 
     <script>
         // Tech Icons for Intro Animation (expanded list)
         const techIcons = [
@@ -1223,6 +867,10 @@
                 tags: ["HTML/CSS", "JavaScript", "Responsive Design"]
             }
         ];
+        // Dark mode toggle functionality
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const mobileDarkModeToggle = document.getElementById('mobile-dark-mode-toggle');
+        const mobileDarkIcon = document.getElementById('mobile-dark-icon');
 
         // Create floating tech icons
         function createFloatingIcons() {
@@ -1253,6 +901,7 @@
         // Create floating particles
         function createParticles() {
             const particlesContainer = document.getElementById('particles-container');
+            
             const numParticles = 500;
             
             for (let i = 0; i < numParticles; i++) {
@@ -1261,7 +910,11 @@
                 const size = Math.random() * 5 + 2; // 2px to 7px
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
-                particle.style.background = 'rgba(255, 255, 255, 0.5)';
+                if(darkModeToggle.checked){
+                    particle.style.background = 'rgba(255, 255, 255, 0.5)';
+                } else {
+                    particle.style.background = 'rgba(0, 0, 0, 0.5)';
+                }
                 particle.style.left = `${Math.random() * 100}%`;
                 particle.style.top = `${Math.random() * 100}%`;
                 particle.style.animationDuration = `${Math.random() * 10 + 5}s`; // 5s to 15s
@@ -1325,11 +978,6 @@
             }, 5000);
         }
 
-        // Dark mode toggle functionality
-        const darkModeToggle = document.getElementById('dark-mode-toggle');
-        const mobileDarkModeToggle = document.getElementById('mobile-dark-mode-toggle');
-        const mobileDarkIcon = document.getElementById('mobile-dark-icon');
-
         function setDarkMode(enabled) {
             if (enabled) {
                 document.body.classList.add('dark-mode');
@@ -1340,6 +988,7 @@
                 mobileDarkIcon.classList.remove('fa-sun');
                 mobileDarkIcon.classList.add('fa-moon');
             }
+            createParticles();
             localStorage.setItem('darkMode', enabled);
         }
 
@@ -1492,6 +1141,6 @@
         
         window.addEventListener('resize', handleResize);
         window.addEventListener('load', handleResize);
-    </script>
+    </script> -->
 </body>
 </html>
